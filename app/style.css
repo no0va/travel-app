@@ -1,0 +1,60 @@
+@font-face {
+  font-family: "iran-sans-en";
+  src: url("@/assets/fonts/IRANSansX-Medium.woff2");
+  font-style: normal;
+  font-weight: 500;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "iran-sans";
+  src: url("@/assets/fonts/IRANSansXFaNum-Bold.woff2");
+  font-style: normal;
+  font-weight: 700;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "iran-sans";
+  src: url("@/assets/fonts/IRANSansXFaNum-Light.woff2");
+  font-style: normal;
+  font-weight: 300;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "iran-sans";
+  src: url("@/assets/fonts/IRANSansXFaNum-DemiBold.woff2");
+  font-style: normal;
+  font-weight: 600;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "iran-sans";
+  src: url("@/assets/fonts/IRANSansXFaNum-Medium.woff2");
+  font-style: normal;
+  font-weight: 500;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "iran-sans";
+  src: url("@/assets/fonts/IRANSansXFaNum-Regular.woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "iran-sans";
+  src: url("@/assets/fonts/IRANSansXFaNum-Thin.woff2");
+  font-style: normal;
+  font-weight: 200;
+  font-display: block;
+}
+
+body {
+  overflow: hidden;
+  font-family: "iran-sans" !important;
+}
