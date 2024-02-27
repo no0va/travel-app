@@ -1,8 +1,13 @@
-import { Button, Image, Pressable, Text, TextInput, View } from "react-native";
+import { Image, Pressable, Text, TextInput, View } from "react-native";
+import UserAcount from "../user-account";
 
 export const LoginPage = () => {
   return (
-    <View>
+    <View
+      style={{
+        flex: 1,
+      }}
+    >
       <View>
         <Image
           source={require("@/assets/images/login.png")}
@@ -14,6 +19,7 @@ export const LoginPage = () => {
       <View
         style={{
           padding: 16,
+          flex: 1,
         }}
       >
         <View
@@ -43,55 +49,63 @@ export const LoginPage = () => {
         </View>
         <View
           style={{
-            padding: 6,
-            marginTop: 60,
-            display: "flex",
-            flexWrap: "wrap",
-            justifyContent: "center",
-            gap: 48,
-            width: "100%",
+            flex: 1,
+            justifyContent: "space-between",
           }}
         >
-          <TextInput
+          <View
             style={{
-              borderBottomColor: "#000",
-              borderBottomWidth: 2,
-              direction: "rtl",
-              fontFamily: "iran-sans",
+              padding: 6,
+              marginTop: 60,
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "center",
+              gap: 48,
               width: "100%",
             }}
-            placeholder="نام کاربری خود را وارد کنید"
-          />
-          <TextInput
-            style={{
-              borderBottomColor: "#000",
-              borderBottomWidth: 2,
-              direction: "rtl",
-              fontFamily: "iran-sans",
-            }}
-            placeholder="نام کاربری خود را وارد کنید"
-          />
-          <Pressable
-            style={{
-              backgroundColor: "rgba(164, 235, 243, 1)",
-              width: 128,
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              height: 48,
-              borderRadius: 48,
-            }}
           >
-            <Text
+            <TextInput
               style={{
-                color: "rgba(12, 53, 158, 1)",
-                fontWeight: "700",
-                fontSize: 24,
+                borderBottomColor: "#000",
+                borderBottomWidth: 2,
+                direction: "rtl",
+                fontFamily: "iran-sans",
+                width: "100%",
+              }}
+              placeholder="نام کاربری خود را وارد کنید"
+            />
+            <TextInput
+              style={{
+                borderBottomColor: "#000",
+                borderBottomWidth: 2,
+                direction: "rtl",
+                fontFamily: "iran-sans",
+              }}
+              placeholder="نام کاربری خود را وارد کنید"
+            />
+            <Pressable
+              style={{
+                backgroundColor: "rgba(164, 235, 243, 1)",
+                width: 128,
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                height: 48,
+                borderRadius: 48,
               }}
             >
-              ورود
-            </Text>
-          </Pressable>
+              <Text
+                style={{
+                  color: "rgba(12, 53, 158, 1)",
+                  fontWeight: "700",
+                  fontSize: 24,
+                }}
+              >
+                ورود
+              </Text>
+            </Pressable>
+          </View>
+          <UserAcount label="ثبت نام" />
         </View>
       </View>
     </View>
