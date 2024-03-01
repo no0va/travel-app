@@ -1,10 +1,17 @@
-import { Image, Pressable, Text, TextInput, View } from "react-native";
+import { Image, StatusBar, Text, TextInput, View } from "react-native";
 import { styles } from "./style";
-import UserAcount from "@/components/user-account";
+import AccountCheck from "@/components/account-check";
+import {
+  AntDesign,
+  FontAwesome,
+  MaterialCommunityIcons,
+} from "@expo/vector-icons";
+import { Button } from "react-native-paper";
 
 export default function Register() {
   return (
     <View style={styles.container}>
+      <StatusBar animated={true} backgroundColor="#CCF2F4" />
       <Image
         source={require("@/assets/images/login.png")}
         style={styles.image}
@@ -13,33 +20,78 @@ export default function Register() {
         <Text style={styles.title}>ثبت نام</Text>
         <View style={styles.contentbox}>
           <View style={styles.inputBox}>
-            <TextInput style={styles.input} placeholder="نام کاربری" />
-            <TextInput style={styles.input} placeholder="ایمیل" />
-            <TextInput style={styles.input} placeholder="رمز عبور" />
-            <TextInput style={styles.input} placeholder="تایید رمز عبور" />
-            <Pressable
-              style={{
-                backgroundColor: "rgba(164, 235, 243, 1)",
-                width: 128,
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                height: 48,
-                borderRadius: 48,
-              }}
-            >
-              <Text
-                style={{
-                  color: "rgba(12, 53, 158, 1)",
-                  fontWeight: "700",
-                  fontSize: 24,
-                }}
-              >
-                ثبت نام
-              </Text>
-            </Pressable>
+            <View style={styles.inputContainer}>
+              <View style={styles.inputBorder}>
+                <FontAwesome name="user-o" style={styles.inputIcon} size={25} />
+                <TextInput style={styles.input} placeholder="نام کاربری" />
+              </View>
+              <AntDesign
+                name="caretright"
+                style={styles.inputArrow}
+                size={13}
+              />
+            </View>
+            <View style={styles.inputContainer}>
+              <View style={styles.inputBorder}>
+                <FontAwesome
+                  name="envelope-o"
+                  style={styles.inputIcon}
+                  size={25}
+                />
+                <TextInput style={styles.input} placeholder="ایمیل" />
+              </View>
+              <AntDesign
+                name="caretright"
+                style={styles.inputArrow}
+                size={13}
+              />
+            </View>
+            <View style={styles.inputContainer}>
+              <View style={styles.inputBorder}>
+                <MaterialCommunityIcons
+                  name="lock-alert-outline"
+                  style={styles.inputIcon}
+                  size={25}
+                />
+                <TextInput style={styles.input} placeholder="رمز عبور" />
+              </View>
+              <AntDesign
+                name="caretright"
+                style={styles.inputArrow}
+                size={13}
+              />
+            </View>
+            <View style={styles.inputContainer}>
+              <View style={styles.inputBorder}>
+                <MaterialCommunityIcons
+                  name="lock-check-outline"
+                  style={styles.inputIcon}
+                  size={25}
+                />
+                <TextInput style={styles.input} placeholder="تایید رمز عبور" />
+              </View>
+              <AntDesign
+                name="caretright"
+                style={styles.inputArrow}
+                size={13}
+              />
+            </View>
+
+            <Button
+              icon="arrow-left"
+              mode="elevated"
+              style={styles.button}
+              onPress={() => console.log("Pressed")}
+              rippleColor={"#3dcbdb"}
+              textColor="rgba(12, 53, 158, 1)"
+              children={<Text style={styles.labelButton}>ثبت نام</Text>}
+            />
           </View>
-          <UserAcount label="ورود" />
+          <Image
+            source={require("@/assets/images/Blob 10.png")}
+            style={{ position: "absolute", bottom: 0, right: -30 }}
+          />
+          <AccountCheck type="login" />
         </View>
       </View>
     </View>
