@@ -1,12 +1,8 @@
-import { Image, StatusBar, Text, TextInput, View } from "react-native";
+import { Image, StatusBar, Text, View } from "react-native";
 import { styles } from "./style";
 import AccountCheck from "@/components/account-check";
-import {
-  AntDesign,
-  FontAwesome,
-  MaterialCommunityIcons,
-} from "@expo/vector-icons";
 import { Button } from "react-native-paper";
+import { BaseInput } from "@/components/base/inputs";
 
 export default function Register() {
   return (
@@ -20,63 +16,10 @@ export default function Register() {
         <Text style={styles.title}>ثبت نام</Text>
         <View style={styles.contentbox}>
           <View style={styles.inputBox}>
-            <View style={styles.inputContainer}>
-              <View style={styles.inputBorder}>
-                <FontAwesome name="user-o" style={styles.inputIcon} size={25} />
-                <TextInput style={styles.input} placeholder="نام کاربری" />
-              </View>
-              <AntDesign
-                name="caretright"
-                style={styles.inputArrow}
-                size={13}
-              />
-            </View>
-            <View style={styles.inputContainer}>
-              <View style={styles.inputBorder}>
-                <FontAwesome
-                  name="envelope-o"
-                  style={styles.inputIcon}
-                  size={25}
-                />
-                <TextInput style={styles.input} placeholder="ایمیل" />
-              </View>
-              <AntDesign
-                name="caretright"
-                style={styles.inputArrow}
-                size={13}
-              />
-            </View>
-            <View style={styles.inputContainer}>
-              <View style={styles.inputBorder}>
-                <MaterialCommunityIcons
-                  name="lock-alert-outline"
-                  style={styles.inputIcon}
-                  size={25}
-                />
-                <TextInput style={styles.input} placeholder="رمز عبور" />
-              </View>
-              <AntDesign
-                name="caretright"
-                style={styles.inputArrow}
-                size={13}
-              />
-            </View>
-            <View style={styles.inputContainer}>
-              <View style={styles.inputBorder}>
-                <MaterialCommunityIcons
-                  name="lock-check-outline"
-                  style={styles.inputIcon}
-                  size={25}
-                />
-                <TextInput style={styles.input} placeholder="تایید رمز عبور" />
-              </View>
-              <AntDesign
-                name="caretright"
-                style={styles.inputArrow}
-                size={13}
-              />
-            </View>
-
+            <BaseInput placeholder="نام کابری" icon="account-outline" />
+            <BaseInput placeholder="ایمیل" icon="email-outline" />
+            <BaseInput placeholder="رمز عبور" icon="lock-alert-outline" />
+            <BaseInput placeholder="تایید رمز عبور" icon="lock-check-outline" />
             <Button
               icon="arrow-left"
               mode="elevated"
