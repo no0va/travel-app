@@ -1,5 +1,5 @@
 import { Image, Pressable, Text, TextInput, View } from "react-native";
-import AccountCheck from "@/components/account-check";;
+import UserAcount from "../user-account";
 
 export const LoginPage = () => {
   return (
@@ -105,7 +105,7 @@ export const LoginPage = () => {
               </Text>
             </Pressable>
           </View>
-          <AccountCheck type="register" />
+          <UserAcount label="ثبت نام" />
         </View>
       </View>
     </View>
