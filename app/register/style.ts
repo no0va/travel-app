@@ -1,9 +1,6 @@
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   image: {
     width: "100%",
   },
@@ -21,7 +18,7 @@ export const styles = StyleSheet.create({
   contentbox: { flex: 1, justifyContent: "space-between" },
   inputBox: {
     paddingHorizontal: 15,
-    marginTop: 40,
+    marginVertical: 40,
     gap: 40,
     width: "100%",
   },
