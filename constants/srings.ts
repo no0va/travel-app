@@ -17,3 +17,7 @@ export const mainStrings = {
   password: "رمز عبور",
   confirmPassword: "تایید رمز عبور",
 };
+
+export const loginText = {
+  description: "لطفا برای ادامه وارد شوید.",
+};
