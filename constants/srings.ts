@@ -12,7 +12,8 @@ export const accountCheck = {
 export const mainStrings = {
   register: "ثبت نام",
   login: "ورود",
-  userName: "نام کابری",
+  name: "نام",
+  family: "نام خانوادگی",
   email: "ایمیل",
   password: "رمز عبور",
   confirmPassword: "تایید رمز عبور",

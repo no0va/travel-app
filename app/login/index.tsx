@@ -6,8 +6,26 @@ import { BaseInput } from "@/components/base/inputs";
 import { loginText, mainStrings } from "@/constants/srings";
 import { Formik } from "formik";
 import * as Yup from "yup";
+import { useEffect } from "react";
+import axios from "axios";
 
 const Login = () => {
+  // useEffect(() => {
+  //   axios.post("https://smh1381.bsite.net/api/Accounts/Signup", {
+  //     name: "ali",
+  //     family: "abelekobha",
+  //     email: "m.ehsan1381dsa@gmail.com",
+  //     password: "@1234Ab123",
+  //     re_Password: "@1234Ab123",
+  //   }).then((json) => console.log(json.data));
+    // axios("https://smh1381.bsite.net/api/Accounts/Login", {
+    //   method: "POST",
+    //   data: {
+    //     email: "m.eh@gmail.com",
+    //     password: "@S123456789",
+    //   },
+    // }).then((json) => console.log(json));
+  // }, []);
   return (
     <Formik
       initialValues={{
@@ -22,7 +40,15 @@ const Login = () => {
           .min(6, "رمز عبور حداقل باید 6 کارکتر باشد!")
           .required("رمز عبور خود را وارد نمایید!"),
       })}
-      onSubmit={(values) => console.log(values)}
+      onSubmit={(values) =>
+        axios("https://smh1381.bsite.net/api/Accounts/Login", {
+          method: "POST",
+          data: {
+            email: values.email,
+            password: values.password,
+          },
+        }).then((json) => console.log(json))
+      }
     >
       {({ handleSubmit, values }) => (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>

@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     borderBottomWidth: 1.5,
     borderColor: "#bbb",
-    paddingBottom: 10,
+    paddingBottom: 5,
     width: "100%",
   },
   inputBorderError: {
@@ -27,7 +27,7 @@ export const styles = StyleSheet.create({
   },
   inputArrow: {
     position: "absolute",
-    top: 31.3,
+    top: 26.7,
     left: -5,
     color: "#bbb",
   },

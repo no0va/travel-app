@@ -7,30 +7,59 @@ import { mainStrings } from "@/constants/srings";
 import { Formik } from "formik";
 import * as Yup from "yup";
 
-export default function Register() {
+export default function Register({ navigation }: any) {
   return (
     <Formik
       initialValues={{
-        username: "",
+        name: "",
+        family: "",
         email: "",
         password: "",
         confirmPassword: "",
       }}
       validationSchema={Yup.object({
-        username: Yup.string()
+        name: Yup.string()
           .max(15, "Must be 15 characters or less")
-          .required("نام کاربری خود را وارد کنید!"),
+          .required("نام خود را وارد کنید!"),
+        family: Yup.string()
+          .max(15, "Must be 15 characters or less")
+          .required("نام خانوادگی خود را وارد کنید!"),
         email: Yup.string()
           .email("ایمیل صحبح نیست!")
           .required("ایمیل خود را وارد نمایید!"),
         password: Yup.string()
-          .min(6, "رمز عبور حداقل باید 6 کارکتر باشد!")
+          .min(8, "رمز عبور حداقل باید 8 کارکتر باشد!")
           .required("رمز عبور خود را وارد نمایید!"),
+        // .matches(
+        //   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
+        //   "رمز عبور یابد شامل حداقل یک عدد، یک حرف خاص،حرف انگلیسی کوچک و بزرگ باشد"
+        // ),
         confirmPassword: Yup.string()
           .oneOf([Yup.ref("password")], "تاییده رمز عبور مطابقت ندارد!")
           .required("تاییده رمز عبور خود را وارد نمایید!"),
       })}
-      onSubmit={(values) => console.log(values)}
+      onSubmit={(values) =>
+        fetch("https://smh1381.bsite.net/api/Accounts/Signup", {
+          method: "POST",
+          body: JSON.stringify({
+            name: values.name,
+            family: values.family,
+            email: values.email,
+            password: values.password,
+            re_Password: values.confirmPassword,
+          }),
+          headers: {
+            "Content-type": "application/json",
+          },
+        })
+          .then((res) => res.json())
+          .then((json) => {
+            if (json.isSuccess) {
+              navigation.navigate("Login", { name: "Login" });
+              console.log("first")
+            }
+          })
+      }
     >
       {({ handleSubmit, values }) => (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
@@ -44,9 +73,16 @@ export default function Register() {
             <View style={styles.contentbox}>
               <View style={styles.inputBox}>
                 <BaseInput
-                  value={values.username}
-                  name="username"
-                  placeholder={mainStrings.userName}
+                  value={values.name}
+                  name="name"
+                  placeholder={mainStrings.name}
+                  icon="account-outline"
+                  type="text"
+                />
+                <BaseInput
+                  value={values.family}
+                  name="family"
+                  placeholder={mainStrings.family}
                   icon="account-outline"
                   type="text"
                 />
