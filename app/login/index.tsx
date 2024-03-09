@@ -9,6 +9,7 @@ import * as Yup from "yup";
 import axios from "axios";
 import { Snackbar } from "react-native-paper";
 import { useState } from "react";
+import { Link } from "expo-router";
 
 const Login = () => {
   const [visible, setVisible] = useState({ show: false, error: null });
@@ -70,6 +71,7 @@ const Login = () => {
                   icon="lock-alert-outline"
                   type="password"
                 />
+                <Link href="/forget-password/" style={styles.forgetPassword}>فراموشی رمز عبور!</Link>
                 <Button
                   icon="arrow-left"
                   mode="elevated"

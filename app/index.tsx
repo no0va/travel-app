@@ -1,5 +1,6 @@
 import { Link } from "expo-router";
 import { useFonts } from "expo-font";
+import ValidationEmail from "./validation-email";
 
 export default function App() {
   let [fontsLoaded] = useFonts({
@@ -11,5 +12,6 @@ export default function App() {
     return <></>;
   } else {
     return <Link href="/login/">123</Link>;
+    // return <ValidationEmail />;
   }
 }

@@ -1,32 +1,27 @@
-import { Platform, StyleSheet } from "react-native";
+import { StyleSheet, Platform } from "react-native";
 
 export const styles = StyleSheet.create({
-  image: {
-    width: "100%",
-  },
-  mainBox: {
-    padding: 16,
+  container: {
     flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  backgroundImage: {
+    flex: 1,
+    width: "100%",
+    resizeMode: "cover",
+    justifyContent: "center",
+    alignItems: "center",
   },
   headerTitle: { paddingRight: 25, marginBottom: 30 },
   title: {
     fontSize: 34,
     fontWeight: "900",
+    lineHeight: 53,
     color: "#5b5a5a",
-    ...Platform.select({
-      ios: {
-        textAlign: "right",
-        fontFamily: "iran-sans",
-      },
-      android: {
-        textAlign: "right",
-        fontFamily: "iran-sans",
-      },
-    }),
   },
   description: {
-    fontSize: 22,
-    marginTop: 15,
+    fontSize: 16,
     fontWeight: "400",
     color: "rgba(153, 153, 153, 1)",
     ...Platform.select({
@@ -40,25 +35,23 @@ export const styles = StyleSheet.create({
       },
     }),
   },
-  contentbox: { flex: 1, justifyContent: "space-between" },
   inputBox: {
-    paddingHorizontal: 15,
-    marginVertical: 40,
-    gap: 40,
-    width: "100%",
+    display: "flex",
+    flexDirection: "row",
+    columnGap: 15,
   },
-  forgetPassword: {
-    marginTop: -30,
-    color: "#0C359E"
+  input: {
+    borderBottomWidth: 1,
+    borderBottomColor: "#5b5a5a",
+    fontSize: 30,
   },
-  inputContainer: { position: "relative" },
   button: {
     backgroundColor: "rgba(164, 235, 243, 1)",
     width: 128,
+    marginTop: 30,
   },
   labelButton: {
     fontWeight: "900",
     fontSize: 16,
-    fontFamily: "iran-sans",
   },
 });

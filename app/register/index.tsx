@@ -7,7 +7,7 @@ import { mainStrings } from "@/constants/srings";
 import { Formik } from "formik";
 import * as Yup from "yup";
 
-export default function Register({ navigation }: any) {
+export default function Register() {
   return (
     <Formik
       initialValues={{
@@ -46,7 +46,7 @@ export default function Register({ navigation }: any) {
             family: values.family,
             email: values.email,
             password: values.password,
-            re_Password: values.confirmPassword,
+            // re_Password: values.confirmPassword,
           }),
           headers: {
             "Content-type": "application/json",
@@ -55,8 +55,8 @@ export default function Register({ navigation }: any) {
           .then((res) => res.json())
           .then((json) => {
             if (json.isSuccess) {
-              navigation.navigate("Login", { name: "Login" });
-              console.log("first")
+              // navigation.navigate("Login", { name: "Login" });
+              console.log("first");
             }
           })
       }

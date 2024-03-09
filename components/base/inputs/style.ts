@@ -1,7 +1,7 @@
 import { Platform, StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
-  baseInputStyle: { zIndex: 100 },
+  baseInputStyle: { zIndex: 100, width: "100%" },
   inputContainer: { position: "relative" },
   inputBorder: {
     flexDirection: "row-reverse",
