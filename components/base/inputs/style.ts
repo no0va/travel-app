@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { Platform, StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   baseInputStyle: { zIndex: 100 },
@@ -27,8 +27,16 @@ export const styles = StyleSheet.create({
   },
   inputArrow: {
     position: "absolute",
-    top: 26.7,
-    left: -5,
+    ...Platform.select({
+      ios: {
+        top: 24,
+        left: -5,
+      },
+      android: {
+        top: 26.7,
+        left: -5,
+      },
+    }),
     color: "#bbb",
   },
   inputArrowError: {

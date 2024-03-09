@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { Platform, StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   image: {
@@ -12,14 +12,33 @@ export const styles = StyleSheet.create({
   title: {
     fontSize: 34,
     fontWeight: "900",
-
     color: "#5b5a5a",
+    ...Platform.select({
+      ios: {
+        textAlign: "right",
+        fontFamily: "iran-sans",
+      },
+      android: {
+        textAlign: "right",
+        fontFamily: "iran-sans",
+      },
+    }),
   },
   description: {
     fontSize: 22,
     marginTop: 15,
     fontWeight: "400",
     color: "rgba(153, 153, 153, 1)",
+    ...Platform.select({
+      ios: {
+        textAlign: "right",
+        fontFamily: "iran-sans",
+      },
+      android: {
+        textAlign: "right",
+        fontFamily: "iran-sans",
+      },
+    }),
   },
   contentbox: { flex: 1, justifyContent: "space-between" },
   inputBox: {
@@ -61,5 +80,6 @@ export const styles = StyleSheet.create({
   labelButton: {
     fontWeight: "900",
     fontSize: 16,
+    fontFamily: "iran-sans",
   },
 });

@@ -1,20 +1,15 @@
-import * as React from "react";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Register from "./register";
-import Login from "./login";
-import ValidationEmail from "./validation-email";
-
-const Stack = createNativeStackNavigator();
+import { Link } from "expo-router";
+import { useFonts } from "expo-font";
 
 export default function App() {
-  return (
-    <NavigationContainer independent={true}>
-      <Stack.Navigator>
-        <Stack.Screen name="Register" component={Register} />
-        <Stack.Screen name="ValidationEmail" component={ValidationEmail} />
-        <Stack.Screen name="Login" component={Login} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
+  let [fontsLoaded] = useFonts({
+    "iran-sans": require("../assets/fonts/ttf/IRANSansWeb.ttf"),
+    "iran-sans-bold": require("../assets/fonts/ttf/IRANSansWeb_Bold.ttf"),
+  });
+
+  if (!fontsLoaded) {
+    return <></>;
+  } else {
+    return <Link href="/login/">123</Link>;
+  }
 }

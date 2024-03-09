@@ -6,26 +6,26 @@ import { BaseInput } from "@/components/base/inputs";
 import { loginText, mainStrings } from "@/constants/srings";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import { useEffect } from "react";
 import axios from "axios";
+import { Snackbar } from "react-native-paper";
+import { useState } from "react";
 
 const Login = () => {
-  // useEffect(() => {
-  //   axios.post("https://smh1381.bsite.net/api/Accounts/Signup", {
-  //     name: "ali",
-  //     family: "abelekobha",
-  //     email: "m.ehsan1381dsa@gmail.com",
-  //     password: "@1234Ab123",
-  //     re_Password: "@1234Ab123",
-  //   }).then((json) => console.log(json.data));
-    // axios("https://smh1381.bsite.net/api/Accounts/Login", {
-    //   method: "POST",
-    //   data: {
-    //     email: "m.eh@gmail.com",
-    //     password: "@S123456789",
-    //   },
-    // }).then((json) => console.log(json));
-  // }, []);
+  const [visible, setVisible] = useState({ show: false, error: null });
+
+  const onDismissSnackBar = () => setVisible({ show: false, error: null });
+  const handleSubmit = async (data: { password: string; email: string }) => {
+    try {
+      const response = await axios.post(
+        "https://smh1381.bsite.net/api/Accounts/Login",
+        data
+      );
+      console.log(response);
+    } catch (error: any) {
+      setVisible({ show: true, error: error.response.data });
+    }
+  };
+
   return (
     <Formik
       initialValues={{
@@ -40,15 +40,7 @@ const Login = () => {
           .min(6, "رمز عبور حداقل باید 6 کارکتر باشد!")
           .required("رمز عبور خود را وارد نمایید!"),
       })}
-      onSubmit={(values) =>
-        axios("https://smh1381.bsite.net/api/Accounts/Login", {
-          method: "POST",
-          data: {
-            email: values.email,
-            password: values.password,
-          },
-        }).then((json) => console.log(json))
-      }
+      onSubmit={handleSubmit}
     >
       {({ handleSubmit, values }) => (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
@@ -99,6 +91,9 @@ const Login = () => {
                 style={{ position: "absolute", top: 350, left: -30 }}
               />
               <AccountCheck type="register" />
+              <Snackbar visible={visible.show} onDismiss={onDismissSnackBar}>
+                {visible.error}
+              </Snackbar>
             </View>
           </View>
         </ScrollView>

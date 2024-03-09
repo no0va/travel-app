@@ -11,11 +11,13 @@ export const styles = StyleSheet.create({
     color: "#999999",
     fontSize: 16,
     fontWeight: "800",
+    fontFamily: "iran-sans",
   },
   link: {
     marginRight: 10,
     color: "#0C359E",
     fontSize: 16,
     fontWeight: "800",
+    fontFamily: "iran-sans",
   },
 });
