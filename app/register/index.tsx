@@ -50,6 +50,7 @@ export default function Register() {
             // re_Password: values.confirmPassword,
           }),
           headers: {
+            Accept: "application/json",
             "Content-type": "application/json",
           },
         })

@@ -7,7 +7,7 @@ import { styles } from "./style";
 import { Button } from "react-native-paper";
 import { useRouter } from "expo-router";
 
-export default function ForgetPassword() {
+export default function NewPassword() {
   const router = useRouter();
   return (
     <Formik

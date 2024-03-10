@@ -36,6 +36,7 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     width: "100%",
+    gap: 40,
     flexDirection: "column",
   },
   button: {
