@@ -42,4 +42,15 @@ export const styles = StyleSheet.create({
   inputArrowError: {
     color: "red",
   },
+  error: {
+    color: "red",
+    ...Platform.select({
+      ios: {
+        textAlign: "right",
+      },
+      android: {
+        textAlign: "right",
+      },
+    }),
+  },
 });

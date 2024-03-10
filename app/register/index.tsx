@@ -6,6 +6,7 @@ import { BaseInput } from "@/components/base/inputs";
 import { mainStrings } from "@/constants/srings";
 import { Formik } from "formik";
 import * as Yup from "yup";
+import { form } from "./constant";
 
 export default function Register() {
   return (
@@ -36,7 +37,7 @@ export default function Register() {
         // ),
         confirmPassword: Yup.string()
           .oneOf([Yup.ref("password")], "تاییده رمز عبور مطابقت ندارد!")
-          .required("تاییده رمز عبور خود را وارد نمایید!"),
+          .required("تایید رمز عبور خود را وارد نمایید!"),
       })}
       onSubmit={(values) =>
         fetch("https://smh1381.bsite.net/api/Accounts/Signup", {
@@ -72,41 +73,16 @@ export default function Register() {
             <Text style={styles.title}>{mainStrings.register}</Text>
             <View style={styles.contentbox}>
               <View style={styles.inputBox}>
-                <BaseInput
-                  value={values.name}
-                  name="name"
-                  placeholder={mainStrings.name}
-                  icon="account-outline"
-                  type="text"
-                />
-                <BaseInput
-                  value={values.family}
-                  name="family"
-                  placeholder={mainStrings.family}
-                  icon="account-outline"
-                  type="text"
-                />
-                <BaseInput
-                  value={values.email}
-                  name="email"
-                  placeholder={mainStrings.email}
-                  icon="email-outline"
-                  type="email"
-                />
-                <BaseInput
-                  value={values.password}
-                  name="password"
-                  placeholder={mainStrings.password}
-                  icon="lock-alert-outline"
-                  type="password"
-                />
-                <BaseInput
-                  value={values.confirmPassword}
-                  name="confirmPassword"
-                  placeholder={mainStrings.confirmPassword}
-                  icon="lock-check-outline"
-                  type="password"
-                />
+                {form(values).map((item) => (
+                  <BaseInput
+                    value={item.value}
+                    name={item.name}
+                    placeholder={item.placeholder}
+                    icon={item.icon}
+                    type={item.type as "password" | "text" | "email"}
+                  />
+                ))}
+
                 <Button
                   icon="arrow-left"
                   mode="elevated"
@@ -123,7 +99,12 @@ export default function Register() {
               </View>
               <Image
                 source={require("@/assets/images/Blob 10.png")}
-                style={{ position: "absolute", top: 350, right: -30 }}
+                style={{
+                  position: "absolute",
+                  top: 350,
+                  right: -30,
+                  zIndex: -1,
+                }}
               />
               <AccountCheck type="login" />
             </View>

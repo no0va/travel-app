@@ -75,7 +75,7 @@ export const BaseInput = ({
         />
       </View>
       {invalidInput && (
-        <Text style={{ color: "red" }}>
+        <Text style={styles.error}>
           {errors[name as keyof FormikTouched<unknown>]}
         </Text>
       )}

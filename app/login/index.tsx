@@ -15,7 +15,7 @@ const Login = () => {
   const [visible, setVisible] = useState({ show: false, error: null });
 
   const onDismissSnackBar = () => setVisible({ show: false, error: null });
-  const handleSubmit = async (data: { password: string; email: string }) => {
+  const submitHandler = async (data: any) => {
     try {
       const response = await axios.post(
         "https://smh1381.bsite.net/api/Accounts/Login",
@@ -23,7 +23,9 @@ const Login = () => {
       );
       console.log(response);
     } catch (error: any) {
-      setVisible({ show: true, error: error.response.data });
+      console.log(error);
+      setVisible({ show: true, error: error?.response?.data });
+      throw error;
     }
   };
 
@@ -41,7 +43,7 @@ const Login = () => {
           .min(6, "رمز عبور حداقل باید 6 کارکتر باشد!")
           .required("رمز عبور خود را وارد نمایید!"),
       })}
-      onSubmit={handleSubmit}
+      onSubmit={submitHandler}
     >
       {({ handleSubmit, values }) => (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
@@ -71,12 +73,14 @@ const Login = () => {
                   icon="lock-alert-outline"
                   type="password"
                 />
-                <Link href="/forget-password/" style={styles.forgetPassword}>فراموشی رمز عبور!</Link>
+                <Link href="/forget-password/" style={styles.forgetPassword}>
+                  فراموشی رمز عبور!
+                </Link>
                 <Button
                   icon="arrow-left"
                   mode="elevated"
                   style={styles.button}
-                  onPress={() => handleSubmit()}
+                  onPress={handleSubmit as any}
                   rippleColor={"#3dcbdb"}
                   textColor="rgba(12, 53, 158, 1)"
                   children={
@@ -94,7 +98,7 @@ const Login = () => {
               />
               <AccountCheck type="register" />
               <Snackbar visible={visible.show} onDismiss={onDismissSnackBar}>
-                {visible.error}
+                {visible?.error}
               </Snackbar>
             </View>
           </View>

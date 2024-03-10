@@ -14,6 +14,7 @@ export const styles = StyleSheet.create({
     lineHeight: 53,
     paddingRight: 25,
     color: "#5b5a5a",
+    fontFamily: "iran-sans",
   },
   contentbox: { flex: 1, justifyContent: "space-between" },
   inputBox: {
