@@ -27,6 +27,11 @@ export default function Register() {
           .required("نام خانوادگی خود را وارد کنید!"),
         email: Yup.string()
           .email("ایمیل صحبح نیست!")
+          .test("email", "ایمیل را به درستی وارد کنید", function (value) {
+            return /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+              value as string
+            );
+          })
           .required("ایمیل خود را وارد نمایید!"),
         password: Yup.string()
           .min(8, "رمز عبور حداقل باید 8 کارکتر باشد!")

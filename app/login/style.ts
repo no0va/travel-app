@@ -49,7 +49,7 @@ export const styles = StyleSheet.create({
   },
   forgetPassword: {
     marginTop: -30,
-    color: "#0C359E"
+    color: "#0C359E",
   },
   inputContainer: { position: "relative" },
   button: {
@@ -60,5 +60,21 @@ export const styles = StyleSheet.create({
     fontWeight: "900",
     fontSize: 16,
     fontFamily: "iran-sans",
+  },
+  snackBar: {
+    fontSize: 14,
+    fontFamily: "iran-sans",
+    ...Platform.select({
+      ios: {
+        textAlign: "right",
+        direction: "rtl",
+        color: "#fff",
+      },
+      android: {
+        textAlign: "right",
+        direction: "rtl",
+        color: "#fff",
+      },
+    }),
   },
 });

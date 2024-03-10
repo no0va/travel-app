@@ -12,22 +12,35 @@ import { useState } from "react";
 import { Link } from "expo-router";
 
 const Login = () => {
-  const [visible, setVisible] = useState({ show: false, error: null });
+  const [visible, setVisible] = useState({ show: false, error: "" });
 
-  const onDismissSnackBar = () => setVisible({ show: false, error: null });
+  const onDismissSnackBar = () => setVisible({ show: false, error: "" });
   const submitHandler = async (data: any) => {
     try {
-      const response = await axios.post(
-        "https://smh1381.bsite.net/api/Accounts/Login",
-        data
+      const response = await fetch(
+        "http://smh1381.bsite.net/api/Accounts/Signup",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            // Add any additional headers here
+          },
+          body: JSON.stringify(data),
+        }
       );
-      console.log(response);
-    } catch (error: any) {
-      console.log(error);
-      setVisible({ show: true, error: error?.response?.data });
-      throw error;
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const responseData = await response.json();
+      console.log(JSON.stringify(responseData));
+    } catch (error) {
+      console.error("Error making POST request:", error);
     }
   };
+
+  console.log(visible.error);
 
   return (
     <Formik
@@ -37,7 +50,11 @@ const Login = () => {
       }}
       validationSchema={Yup.object({
         email: Yup.string()
-          .email("ایمیل صحبح نیست!")
+          .test("email", "ایمیل را به درستی وارد کنید", function (value) {
+            return /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+              value as string
+            );
+          })
           .required("ایمیل خود را وارد نمایید!"),
         password: Yup.string()
           .min(6, "رمز عبور حداقل باید 6 کارکتر باشد!")
@@ -45,7 +62,7 @@ const Login = () => {
       })}
       onSubmit={submitHandler}
     >
-      {({ handleSubmit, values }) => (
+      {({ handleSubmit, values, errors }) => (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
           <StatusBar animated={true} backgroundColor="#CCF2F4" />
           <Image
@@ -80,7 +97,8 @@ const Login = () => {
                   icon="arrow-left"
                   mode="elevated"
                   style={styles.button}
-                  onPress={handleSubmit as any}
+                  onPress={errors && (handleSubmit as any)}
+                  disabled={!!errors.email || !!errors.password}
                   rippleColor={"#3dcbdb"}
                   textColor="rgba(12, 53, 158, 1)"
                   children={
@@ -97,9 +115,11 @@ const Login = () => {
                 style={{ position: "absolute", top: 350, left: -30 }}
               />
               <AccountCheck type="register" />
-              <Snackbar visible={visible.show} onDismiss={onDismissSnackBar}>
-                {visible?.error}
-              </Snackbar>
+              {visible.show ? (
+                <Snackbar visible={visible.show} onDismiss={onDismissSnackBar}>
+                  ".نام کاربری یا رمز عبور اشتباه است"
+                </Snackbar>
+              ) : null}
             </View>
           </View>
         </ScrollView>
