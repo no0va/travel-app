@@ -3,8 +3,11 @@ import { Text } from "react-native";
 import { styles } from "./style";
 import { Formik } from "formik";
 import { Button } from "react-native-paper";
+import { useRouter } from "expo-router";
+import axios from "axios";
 
 export default function ValidationEmail() {
+  const router = useRouter();
   return (
     <Formik
       initialValues={{
@@ -13,7 +16,23 @@ export default function ValidationEmail() {
         input3: "",
         input4: "",
       }}
-      onSubmit={(values) => console.log(values)}
+      onSubmit={(values) =>
+        axios
+          .get(
+            `https://smh1381.bsite.net/api/Accounts/EmailValidation?code=${
+              values.input1 + values.input2 + values.input3 + values.input4
+            }`
+          )
+
+          .then((json) => {
+            // if (json.isSuccess) {
+            // navigation.navigate("Login", { name: "Login" });
+            // console.log("first");
+            router.replace("./new-password");
+            console.log("first");
+            // }
+          })
+      }
     >
       {({ handleSubmit, values, handleChange, handleBlur }) => (
         <View style={styles.container}>
