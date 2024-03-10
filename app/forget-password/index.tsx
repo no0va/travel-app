@@ -5,14 +5,28 @@ import React from "react";
 import { Image, Text, View } from "react-native";
 import { styles } from "./style";
 import { Button } from "react-native-paper";
+import { useRouter } from "expo-router";
 
 export default function ForgetPassword() {
+  const router = useRouter();
   return (
     <Formik
       initialValues={{
         email: "",
       }}
-      onSubmit={(values) => console.log(values)}
+      onSubmit={(values) => {
+        fetch(
+          `https://smh1381.bsite.net/api/Accounts/SendSecurityCodeWithMail/?email=${values.email}`
+        )
+          .then((res) => res.json())
+          .then((json) => {
+            if (json.isSuccess) {
+              // navigation.navigate("Login", { name: "Login" });
+              // console.log("first");
+              router.replace("./validation-email");
+            }
+          });
+      }}
     >
       {({ handleSubmit, values }) => (
         <View style={{ flex: 1 }}>
@@ -24,9 +38,7 @@ export default function ForgetPassword() {
             <Text style={styles.description}>
               رمز عبور خود را فراموش کرده اید؟
             </Text>
-            <View
-              style={styles.inputBox}
-            >
+            <View style={styles.inputBox}>
               <BaseInput
                 value={values.email}
                 name="email"
