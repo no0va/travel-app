@@ -1,43 +1,56 @@
 import { BaseInput } from "@/components/base/inputs";
 import { mainStrings } from "@/constants/srings";
 import { Formik } from "formik";
-import React from "react";
-import { Image, Text, View } from "react-native";
+import React, { useState } from "react";
+import {
+  GestureResponderEvent,
+  Image,
+  ScrollView,
+  StatusBar,
+  Text,
+  View,
+} from "react-native";
 import { styles } from "./style";
 import { Button } from "react-native-paper";
 import { useRouter } from "expo-router";
+import BaseButton from "@/components/base/button";
 
 export default function ForgetPassword() {
   const router = useRouter();
+  const [showSpinner, setShowSpinner] = useState<boolean>(false);
+
   return (
     <Formik
       initialValues={{
         email: "",
       }}
       onSubmit={(values) => {
+        setShowSpinner(true);
         fetch(
-          `https://smh1381.bsite.net/api/Accounts/SendSecurityCodeWithMail/?email=${values.email}`
+          `https://travelorganization.monster/api/User/Email/SendSecurityCodeWithMail?email=${values.email}`
         )
           .then((res) => res.json())
           .then((json) => {
+            console.log(json);
+            setShowSpinner(false);
             if (json.isSuccess) {
-              // navigation.navigate("Login", { name: "Login" });
-              // console.log("first");
               router.replace("./validation-email");
             }
+          })
+          .catch((error) => {
+            setShowSpinner(false);
+            console.log(error);
           });
       }}
     >
       {({ handleSubmit, values }) => (
-        <View style={{ flex: 1 }}>
-          <Image
-            source={require("@/assets/images/login.png")}
-            style={styles.image}
-          />
+        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+          <StatusBar animated={true} backgroundColor="#fff" />
+          <View style={styles.imageBox}>
+            <Image source={require("@/assets/images/travel-logo.png")} />
+          </View>
           <View style={styles.contentBox}>
-            <Text style={styles.description}>
-              رمز عبور خود را فراموش کرده اید؟
-            </Text>
+            <Text style={styles.description}>رمز عبور خود را فراموش کرده اید؟</Text>
             <View style={styles.inputBox}>
               <BaseInput
                 value={values.email}
@@ -46,17 +59,16 @@ export default function ForgetPassword() {
                 icon="email-outline"
                 type="email"
               />
-              <Button
-                mode="elevated"
-                style={styles.button}
-                onPress={() => handleSubmit()}
-                rippleColor={"#3dcbdb"}
-                textColor="rgba(12, 53, 158, 1)"
-                children={<Text style={styles.labelButton}>ارسال</Text>}
-              />
             </View>
+            <BaseButton
+              handleSubmit={
+                handleSubmit as (e: GestureResponderEvent | undefined) => void
+              }
+              label="دریافت کد"
+              loader={showSpinner}
+            />
           </View>
-        </View>
+        </ScrollView>
       )}
     </Formik>
   );

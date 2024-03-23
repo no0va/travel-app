@@ -5,25 +5,19 @@ export const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    padding: 25,
   },
-  backgroundImage: {
-    flex: 1,
-    width: "100%",
-    resizeMode: "cover",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  headerTitle: { paddingRight: 25, marginBottom: 30 },
+  headerTitle: { marginBottom: 30 },
   title: {
     fontSize: 34,
     fontWeight: "900",
     lineHeight: 53,
-    color: "#5b5a5a",
+    color: "#0C359E",
   },
   description: {
     fontSize: 16,
     fontWeight: "400",
-    color: "rgba(153, 153, 153, 1)",
+    color: "#0C359E",
     ...Platform.select({
       ios: {
         textAlign: "right",
@@ -39,19 +33,15 @@ export const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     columnGap: 15,
+    marginBottom: 30,
   },
   input: {
-    borderBottomWidth: 1,
-    borderBottomColor: "#5b5a5a",
-    fontSize: 30,
-  },
-  button: {
-    backgroundColor: "rgba(164, 235, 243, 1)",
-    width: 128,
-    marginTop: 30,
-  },
-  labelButton: {
-    fontWeight: "900",
-    fontSize: 16,
+    borderWidth: 1.5,
+    borderColor: "#0C359E",
+    borderRadius: 10,
+    color: "#0C359E",
+    fontSize: 40,
+    textAlign: "center",
+    width: 35,
   },
 });

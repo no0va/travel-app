@@ -1,4 +1,11 @@
-import { Image, ScrollView, StatusBar, Text, View } from "react-native";
+import {
+  GestureResponderEvent,
+  Image,
+  ScrollView,
+  StatusBar,
+  Text,
+  View,
+} from "react-native";
 import { styles } from "./style";
 import AccountCheck from "@/components/account-check";
 import { Button } from "react-native-paper";
@@ -7,8 +14,13 @@ import { mainStrings } from "@/constants/srings";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { form } from "./constant";
+import React, { useState } from "react";
+import { useRouter } from "expo-router";
+import BaseButton from "@/components/base/button";
 
 export default function Register() {
+  const router = useRouter();
+  const [showSpinner, setShowSpinner] = useState<boolean>(false);
   return (
     <Formik
       initialValues={{
@@ -44,8 +56,9 @@ export default function Register() {
           .oneOf([Yup.ref("password")], "تاییده رمز عبور مطابقت ندارد!")
           .required("تایید رمز عبور خود را وارد نمایید!"),
       })}
-      onSubmit={(values) =>
-        fetch("https://smh1381.bsite.net/api/Accounts/Signup", {
+      onSubmit={(values) => {
+        setShowSpinner(true);
+        fetch("https://travelorganization.monster/api/User/Accounts/SignUp", {
           method: "POST",
           body: JSON.stringify({
             name: values.name,
@@ -61,59 +74,55 @@ export default function Register() {
         })
           .then((res) => res.json())
           .then((json) => {
+            setShowSpinner(false);
             if (json.isSuccess) {
-              // navigation.navigate("Login", { name: "Login" });
-              console.log("first");
+              router.replace("/validation-email/");
             }
           })
-      }
+          .catch((error) => {
+            setShowSpinner(false);
+            console.log(error.massage);
+          });
+      }}
     >
       {({ handleSubmit, values }) => (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-          <StatusBar animated={true} backgroundColor="#CCF2F4" />
-          <Image
-            source={require("@/assets/images/login.png")}
-            style={styles.image}
-          />
-          <View style={styles.mainBox}>
-            <Text style={styles.title}>{mainStrings.register}</Text>
-            <View style={styles.contentbox}>
-              <View style={styles.inputBox}>
-                {form(values).map((item) => (
-                  <BaseInput
-                    value={item.value}
-                    name={item.name}
-                    placeholder={item.placeholder}
-                    icon={item.icon}
-                    type={item.type as "password" | "text" | "email"}
-                  />
-                ))}
-
-                <Button
-                  icon="arrow-left"
-                  mode="elevated"
-                  style={styles.button}
-                  onPress={() => handleSubmit()}
-                  rippleColor={"#3dcbdb"}
-                  textColor="rgba(12, 53, 158, 1)"
-                  children={
-                    <Text style={styles.labelButton}>
-                      {mainStrings.register}
-                    </Text>
-                  }
+          <StatusBar animated={true} backgroundColor="#fff" />
+          <View style={styles.imageBox}>
+            <Image source={require("@/assets/images/travel-logo.png")} />
+          </View>
+          <View style={styles.inputBox}>
+            {form(values).map((item) => (
+              <React.Fragment key={item.name}>
+                <BaseInput
+                  value={item.value}
+                  name={item.name}
+                  placeholder={item.placeholder}
+                  icon={item.icon}
+                  type={item.type as "password" | "text" | "email"}
                 />
-              </View>
-              <Image
-                source={require("@/assets/images/Blob 10.png")}
-                style={{
-                  position: "absolute",
-                  top: 350,
-                  right: -30,
-                  zIndex: -1,
-                }}
-              />
-              <AccountCheck type="login" />
-            </View>
+                {item.line && (
+                  <View
+                    style={{
+                      backgroundColor: "#bbb",
+                      width: "100%",
+                      height: 1.5,
+                      marginVertical: 15,
+                    }}
+                  ></View>
+                )}
+              </React.Fragment>
+            ))}
+          </View>
+          <View style={styles.contentbox}>
+            <BaseButton
+              handleSubmit={
+                handleSubmit as (e: GestureResponderEvent | undefined) => void
+              }
+              label={mainStrings.register}
+              loader={showSpinner}
+            />
+            <AccountCheck type="login" />
           </View>
         </ScrollView>
       )}

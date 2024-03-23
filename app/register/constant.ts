@@ -8,6 +8,7 @@ export const form = (value: any) => {
       placeholder: mainStrings.name,
       icon: "account-outline",
       type: "text",
+      line: true,
     },
     {
       value: value.family,
@@ -15,6 +16,7 @@ export const form = (value: any) => {
       placeholder: mainStrings.family,
       icon: "account-outline",
       type: "text",
+      line: true,
     },
     {
       value: value.email,
@@ -22,6 +24,7 @@ export const form = (value: any) => {
       placeholder: mainStrings.email,
       icon: "email-outline",
       type: "email",
+      line: true,
     },
     {
       value: value.password,
@@ -29,6 +32,7 @@ export const form = (value: any) => {
       placeholder: mainStrings.password,
       icon: "lock-alert-outline",
       type: "password",
+      line: true,
     },
     {
       value: value.confirmPassword,
@@ -36,6 +40,7 @@ export const form = (value: any) => {
       placeholder: mainStrings.confirmPassword,
       icon: "lock-check-outline",
       type: "password",
+      line: false,
     },
   ];
 };

@@ -1,25 +1,20 @@
 import { StyleSheet, Platform } from "react-native";
 
 export const styles = StyleSheet.create({
-  image: {
-    width: "100%",
-  },
   contentBox: {
-    paddingHorizontal: 35,
     marginVertical: 70,
-    width: "100%",
+    marginHorizontal: 20,
   },
-  backgroundImage: {
-    flex: 1,
-    width: "100%",
-    resizeMode: "cover",
-    justifyContent: "center",
-    alignItems: "center",
+  title: {
+    fontSize: 34,
+    fontWeight: "900",
+    lineHeight: 53,
+    color: "#0C359E",
   },
   description: {
     fontSize: 20,
     fontWeight: "400",
-    color: "rgba(153, 153, 153, 1)",
+    color: "#0C359E",
     ...Platform.select({
       ios: {
         textAlign: "right",
@@ -32,20 +27,10 @@ export const styles = StyleSheet.create({
     }),
   },
   inputBox: {
-    marginTop: 60,
-    justifyContent: "center",
-    alignItems: "center",
-    width: "100%",
-    gap: 40,
-    flexDirection: "column",
-  },
-  button: {
-    backgroundColor: "rgba(164, 235, 243, 1)",
-    width: 200,
-    marginTop: 40,
-  },
-  labelButton: {
-    fontWeight: "900",
-    fontSize: 16,
+    borderWidth: 1.5,
+    borderColor: "#0C359E",
+    borderRadius: 10,
+    padding: 15,
+    marginVertical: 40,
   },
 });

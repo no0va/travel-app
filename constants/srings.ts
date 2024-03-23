@@ -10,8 +10,8 @@ export const accountCheck = {
 };
 
 export const mainStrings = {
-  register: "ثبت نام",
-  login: "ورود",
+  register: "ثبت حساب",
+  login: "ورود به برنامه",
   name: "نام",
   family: "نام خانوادگی",
   email: "ایمیل",
