@@ -13,6 +13,7 @@ import { styles } from "./style";
 import { Button } from "react-native-paper";
 import { useRouter } from "expo-router";
 import BaseButton from "@/components/base/button";
+import * as Yup from "yup";
 
 export default function NewPassword() {
   const router = useRouter();
@@ -27,7 +28,7 @@ export default function NewPassword() {
       onSubmit={(values) => {
         setShowSpinner(true);
         fetch(
-          `https://travelorganization.monster/api/User/Accounts/ForgetPassword?newPassword==${values.password}`
+          `https://travelorganization.monster/api/User/Accounts/ForgetPassword?newPassword=${values.password}`
         )
           .then((res) => res.json())
           .then((json) => {
@@ -41,15 +42,35 @@ export default function NewPassword() {
             console.log(error);
           });
       }}
+      validationSchema={Yup.object({
+        password: Yup.string()
+          .min(8, "رمز عبور حداقل باید 8 کارکتر باشد!")
+          .required("رمز عبور خود را وارد نمایید!")
+          .matches(
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[-_!@#$%^&*])(?=.{8,})/,
+            "رمز عبور یابد شامل حداقل یک عدد، یک حرف خاص،حرف انگلیسی کوچک و بزرگ باشد"
+          ),
+        confirmPassword: Yup.string()
+          .required("تایید رمز عبور خود را وارد نمایید!")
+          .oneOf([Yup.ref("password")], "تاییده رمز عبور مطابقت ندارد!"),
+      })}
     >
-      {({ handleSubmit, values }) => (
+      {({ handleSubmit, values, errors }) => (
         <View style={{ flex: 1 }}>
           <View style={styles.contentBox}>
-            <Text style={styles.title}>تایید کد</Text>
+            <Text style={styles.title}>تغییر رمز</Text>
             <Text style={styles.description}>
               رمز عبور جدید خود را وارد نمایید
             </Text>
-            <View style={styles.inputBox}>
+            <View
+              style={{
+                ...styles.inputBox,
+                borderColor:
+                  errors.confirmPassword || errors.password
+                    ? "#ff0000"
+                    : "#0C359E",
+              }}
+            >
               <BaseInput
                 value={values.password}
                 name="password"
@@ -72,6 +93,9 @@ export default function NewPassword() {
                 icon="lock-check-outline"
                 type="email"
               />
+              <Text style={styles.error}>
+                {errors.confirmPassword || errors.password}
+              </Text>
             </View>
             <BaseButton
               handleSubmit={

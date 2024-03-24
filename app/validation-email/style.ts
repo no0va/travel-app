@@ -30,9 +30,6 @@ export const styles = StyleSheet.create({
     }),
   },
   inputBox: {
-    display: "flex",
-    flexDirection: "row",
-    columnGap: 15,
     marginBottom: 30,
   },
   input: {

@@ -7176,6 +7176,18 @@ react-is@^17.0.1:
   resolved "https://registry.npmjs.org/react-is/-/react-is-17.0.2.tgz"
   integrity sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==
 
+react-native-otp-entry@^1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/react-native-otp-entry/-/react-native-otp-entry-1.6.0.tgz#48aa0da4b81c079094db8835e203aec1f58abd3b"
+  integrity sha512-zbvJGwfman2fJAEK3vPJybWf6jqglYUndnjoiaZpTaIJQubz6z1OUnrluA+Rdy3HwVTbD1J1Pt95mXj+QL6Urw==
+
+react-native-otp-textinput@^1.1.5:
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/react-native-otp-textinput/-/react-native-otp-textinput-1.1.5.tgz#63401cac2c63b26230af1b3179952a524bb5214b"
+  integrity sha512-zV5aq5gyU54SPn5WGC8el0P1RdOEb0FiuPg9O+yBhwieDy2/ov16830KCHPG0ZNN5DErTPtzwLbrXQUdrt7tNA==
+  dependencies:
+    react "^18.2.0"
+
 react-native-paper@^5.12.3:
   version "5.12.3"
   resolved "https://registry.npmjs.org/react-native-paper/-/react-native-paper-5.12.3.tgz"
@@ -7288,7 +7300,7 @@ react-transition-group@^4.4.5:
     loose-envify "^1.4.0"
     prop-types "^15.6.2"
 
-react@18.2.0:
+react@18.2.0, react@^18.2.0:
   version "18.2.0"
   resolved "https://registry.npmjs.org/react/-/react-18.2.0.tgz"
   integrity sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==

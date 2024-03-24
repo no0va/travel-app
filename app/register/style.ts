@@ -14,8 +14,7 @@ export const styles = StyleSheet.create({
     marginHorizontal: 20,
   },
   inputBox: {
-    borderWidth: 1.5,
-    borderColor: "#0C359E",
+    borderWidth: 2,
     borderRadius: 10,
     padding: 15,
     marginVertical: 40,
@@ -52,6 +51,23 @@ export const styles = StyleSheet.create({
         textAlign: "right",
         direction: "rtl",
         color: "#fff",
+      },
+    }),
+  },
+  error: {
+    position: "absolute",
+    top: 305,
+    right: 0,
+    color: "#ff0000",
+    marginHorizontal: 20,
+    ...Platform.select({
+      ios: {
+        textAlign: "right",
+        direction: "rtl",
+      },
+      android: {
+        textAlign: "right",
+        direction: "rtl",
       },
     }),
   },
