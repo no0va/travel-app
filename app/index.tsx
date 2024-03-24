@@ -2,6 +2,7 @@ import { Link } from "expo-router";
 import { useFonts } from "expo-font";
 import { styles } from "./style";
 import { View } from "react-native";
+import Landing from "./landing";
 
 export default function App() {
   let [fontsLoaded] = useFonts({
@@ -13,9 +14,10 @@ export default function App() {
     return <></>;
   } else {
     return (
-      <View style={styles.header}>
-        <Link href="/login/">👤</Link>
-      </View>
+      // <View style={styles.header}>
+      //   <Link href="/login/">👤</Link>
+      // </View>
+      <Landing />
     );
   }
 }
