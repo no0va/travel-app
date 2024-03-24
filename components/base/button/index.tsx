@@ -7,17 +7,19 @@ export default function BaseButton({
   handleSubmit,
   label,
   loader,
+  disabled,
 }: {
   handleSubmit: (e: GestureResponderEvent | undefined) => void;
   label: string;
   loader: boolean;
+  disabled?: boolean;
 }) {
   return (
     <Button
       mode="elevated"
       style={styles.button}
       onPress={handleSubmit}
-      // disabled={!!errors.email || !!errors.password}
+      disabled={disabled}
       rippleColor={"#3dcbdb"}
       textColor="rgba(12, 53, 158, 1)"
       children={

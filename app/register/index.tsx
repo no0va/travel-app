@@ -47,11 +47,11 @@ export default function Register() {
           .required("ایمیل خود را وارد نمایید!"),
         password: Yup.string()
           .min(8, "رمز عبور حداقل باید 8 کارکتر باشد!")
-          .required("رمز عبور خود را وارد نمایید!"),
-        // .matches(
-        //   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
-        //   "رمز عبور یابد شامل حداقل یک عدد، یک حرف خاص،حرف انگلیسی کوچک و بزرگ باشد"
-        // ),
+          .required("رمز عبور خود را وارد نمایید!")
+          .matches(
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[-_!@#$%^&*])(?=.{8,})/,
+            "رمز عبور یابد شامل حداقل یک عدد، یک حرف خاص،حرف انگلیسی کوچک و بزرگ باشد"
+          ),
         confirmPassword: Yup.string()
           .oneOf([Yup.ref("password")], "تاییده رمز عبور مطابقت ندارد!")
           .required("تایید رمز عبور خود را وارد نمایید!"),
@@ -85,13 +85,18 @@ export default function Register() {
           });
       }}
     >
-      {({ handleSubmit, values }) => (
+      {({ handleSubmit, values, errors }) => (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
           <StatusBar animated={true} backgroundColor="#fff" />
           <View style={styles.imageBox}>
             <Image source={require("@/assets/images/travel-logo.png")} />
           </View>
-          <View style={styles.inputBox}>
+          <View
+            style={{
+              ...styles.inputBox,
+              borderColor: Object.keys(errors).length ? "#ff0000" : "#0C359E",
+            }}
+          >
             {form(values).map((item) => (
               <React.Fragment key={item.name}>
                 <BaseInput
@@ -113,6 +118,13 @@ export default function Register() {
                 )}
               </React.Fragment>
             ))}
+            <Text style={styles.error}>
+              {errors.confirmPassword ||
+                errors.email ||
+                errors.family ||
+                errors.name ||
+                errors.password}
+            </Text>
           </View>
           <View style={styles.contentbox}>
             <BaseButton

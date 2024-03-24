@@ -27,10 +27,26 @@ export const styles = StyleSheet.create({
     }),
   },
   inputBox: {
-    borderWidth: 1.5,
-    borderColor: "#0C359E",
+    borderWidth: 2,
     borderRadius: 10,
     padding: 15,
     marginVertical: 40,
+  },
+  error: {
+    position: "absolute",
+    top: 125,
+    right: 0,
+    color: "#ff0000",
+    marginHorizontal: 20,
+    ...Platform.select({
+      ios: {
+        textAlign: "right",
+        direction: "rtl",
+      },
+      android: {
+        textAlign: "right",
+        direction: "rtl",
+      },
+    }),
   },
 });

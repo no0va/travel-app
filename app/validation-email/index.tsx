@@ -1,38 +1,28 @@
-import {
-  GestureResponderEvent,
-  ImageBackground,
-  TextInput,
-  View,
-} from "react-native";
+//@ts-nocheck
+import { GestureResponderEvent, TextInput, View } from "react-native";
 import { Text } from "react-native";
 import { styles } from "./style";
 import { Formik } from "formik";
-import { Button } from "react-native-paper";
 import { useRouter } from "expo-router";
 import axios from "axios";
 import BaseButton from "@/components/base/button";
 import { useState } from "react";
+import { OtpInput } from "react-native-otp-entry";
 
 export default function ValidationEmail() {
   const router = useRouter();
-  const inputs = ["input1", "input2", "input3", "input4"];
   const [showSpinner, setShowSpinner] = useState<boolean>(false);
 
   return (
     <Formik
       initialValues={{
-        input1: "",
-        input2: "",
-        input3: "",
-        input4: "",
+        code: "",
       }}
       onSubmit={(values) => {
         setShowSpinner(true);
         axios
           .get(
-            `https://travelorganization.monster/api/User/Email/EmailValidation?code=${
-              values.input1 + values.input2 + values.input3 + values.input4
-            }`
+            `https://travelorganization.monster/api/User/Email/EmailValidation?code=${values.code}`
           )
           .then((json) => {
             setShowSpinner(false);
@@ -47,7 +37,7 @@ export default function ValidationEmail() {
           });
       }}
     >
-      {({ handleSubmit, values, handleChange, handleBlur }) => (
+      {({ handleSubmit, values, handleChange, errors }) => (
         <View style={styles.container}>
           <View style={styles.headerTitle}>
             <Text style={styles.title}>تایید کد</Text>
@@ -55,23 +45,29 @@ export default function ValidationEmail() {
               لطفا کدی که به ایمیل شما ارسال شده را وارد کنید.
             </Text>
           </View>
-          <View style={styles.inputBox}>
-            {inputs.map((input) => (
-              <TextInput
-                key={input}
-                value={
-                  values[input as "input1" | "input2" | "input3" | "input4"]
-                }
-                style={styles.input}
-                placeholder="X"
-                keyboardType="decimal-pad"
-                onChangeText={handleChange(input)}
-                secureTextEntry={false}
-                onBlur={handleBlur(input)}
-                maxLength={1}
-                cursorColor="#0C359E"
-              />
-            ))}
+          <View
+            style={{
+              ...styles.inputBox,
+              borderColor: errors.code ? "#ff0000" : "#0C359E",
+            }}
+          >
+            <OtpInput
+              numberOfDigits={4}
+              onTextChange={handleChange("code")}
+              theme={{
+                inputsContainerStyle: {
+                  gap: 16,
+                },
+                pinCodeContainerStyle: {
+                  borderColor: "rgba(12, 53, 158, 1)",
+                  borderWidth: 2,
+                  width: 50,
+                },
+                pinCodeTextStyle: {
+                  fontFamily: "iran-snas",
+                },
+              }}
+            />
           </View>
           <BaseButton
             label="ارسال"

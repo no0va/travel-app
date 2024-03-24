@@ -34,4 +34,21 @@ export const styles = StyleSheet.create({
     // gap: 30,
     // width: "100%",
   },
+  error: {
+    position: "absolute",
+    bottom: -30,
+    right: 0,
+    color: "#ff0000",
+    marginHorizontal: 20,
+    ...Platform.select({
+      ios: {
+        textAlign: "right",
+        direction: "rtl",
+      },
+      android: {
+        textAlign: "right",
+        direction: "rtl",
+      },
+    }),
+  },
 });

@@ -67,7 +67,11 @@ const Login = () => {
           .required("ایمیل خود را وارد نمایید!"),
         password: Yup.string()
           .min(8, "رمز عبور حداقل باید 8 کارکتر باشد!")
-          .required("رمز عبور خود را وارد نمایید!"),
+          .required("رمز عبور خود را وارد نمایید!")
+          .matches(
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[-_!@#$%^&*])(?=.{8,})/,
+            "رمز عبور یابد شامل حداقل یک عدد، یک حرف خاص،حرف انگلیسی کوچک و بزرگ باشد"
+          ),
       })}
       onSubmit={submitHandler}
     >
@@ -78,7 +82,13 @@ const Login = () => {
             <Image source={require("@/assets/images/travel-logo.png")} />
           </View>
 
-          <View style={styles.inputBox}>
+          <View
+            style={{
+              ...styles.inputBox,
+              borderColor:
+                errors.email || errors.password ? "#ff0000" : "#0C359E",
+            }}
+          >
             <BaseInput
               value={values.email}
               name="email"
@@ -101,6 +111,7 @@ const Login = () => {
               icon="lock-alert-outline"
               type="password"
             />
+            <Text style={styles.error}>{errors.email || errors.password}</Text>
           </View>
           <View style={styles.contentbox}>
             <View style={{ alignItems: "center" }}>
