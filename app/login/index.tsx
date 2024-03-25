@@ -22,32 +22,28 @@ import BaseButton from "@/components/base/button";
 const Login = () => {
   const [visible, setVisible] = useState({ show: false, error: "" });
   const [showSpinner, setShowSpinner] = useState<boolean>(false);
+  const [resError, setResError] = useState<string>("");
   const router = useRouter();
 
   const onDismissSnackBar = () => setVisible({ show: false, error: "" });
   const submitHandler = (values: { email: string; password: string }) => {
     setShowSpinner(true);
-    fetch("https://travelorganization.monster/api/User/Accounts/Login", {
-      method: "POST",
-      body: JSON.stringify({
+    axios
+      .post("https://travelorganization.monster/api/User/Accounts/Login", {
         email: values.email,
         password: values.password,
-      }),
-      headers: {
-        "Content-type": "application/json",
-      },
-    })
-      .then((res) => res.json())
+      })
       .then((json) => {
         setShowSpinner(false);
         console.log(json);
-        if (json.isSuccess) {
+        if (json.data.isSuccess) {
           router.replace("/validation-email/");
         }
       })
       .catch((error) => {
         setShowSpinner(false);
-        console.log(error.massage);
+        console.log(error.response.data);
+        setResError(error.response.data);
       });
   };
 
@@ -86,7 +82,7 @@ const Login = () => {
             style={{
               ...styles.inputBox,
               borderColor:
-                errors.email || errors.password ? "#ff0000" : "#0C359E",
+                errors.email || errors.password || resError ? "#ff0000" : "#0C359E",
             }}
           >
             <BaseInput
@@ -111,7 +107,9 @@ const Login = () => {
               icon="lock-alert-outline"
               type="password"
             />
-            <Text style={styles.error}>{errors.email || errors.password}</Text>
+            <Text style={styles.error}>
+              {errors.email || errors.password || resError}
+            </Text>
           </View>
           <View style={styles.contentbox}>
             <View style={{ alignItems: "center" }}>

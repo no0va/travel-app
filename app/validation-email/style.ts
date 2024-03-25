@@ -30,7 +30,11 @@ export const styles = StyleSheet.create({
     }),
   },
   inputBox: {
-    marginBottom: 30,
+    // display: "flex",
+    // flexDirection: "row",
+    // columnGap: 15,
+    // marginBottom: 30,
+    backgroundColor: "red",
   },
   input: {
     borderWidth: 1.5,
@@ -40,5 +44,18 @@ export const styles = StyleSheet.create({
     fontSize: 40,
     textAlign: "center",
     width: 35,
+  },
+  error: {
+    color: "#ff0000",
+    ...Platform.select({
+      ios: {
+        textAlign: "right",
+        direction: "rtl",
+      },
+      android: {
+        textAlign: "right",
+        direction: "rtl",
+      },
+    }),
   },
 });

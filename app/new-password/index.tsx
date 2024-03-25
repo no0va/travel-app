@@ -14,6 +14,7 @@ import { Button } from "react-native-paper";
 import { useRouter } from "expo-router";
 import BaseButton from "@/components/base/button";
 import * as Yup from "yup";
+import axios from "axios";
 
 export default function NewPassword() {
   const router = useRouter();
@@ -27,13 +28,14 @@ export default function NewPassword() {
       }}
       onSubmit={(values) => {
         setShowSpinner(true);
-        fetch(
-          `https://travelorganization.monster/api/User/Accounts/ForgetPassword?newPassword=${values.password}`
-        )
-          .then((res) => res.json())
+        axios
+          .post(
+            `https://travelorganization.monster/api/User/Accounts/ForgetPassword?newPassword=${values.password}`,
+            { email: "m.ehsan1381@gmail.com" }
+          )
           .then((json) => {
             setShowSpinner(false);
-            if (json.isSuccess) {
+            if (json.data.isSuccess) {
               router.replace("./login");
             }
           })
