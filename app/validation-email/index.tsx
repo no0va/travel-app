@@ -12,6 +12,7 @@ import { OtpInput } from "react-native-otp-entry";
 export default function ValidationEmail() {
   const router = useRouter();
   const [showSpinner, setShowSpinner] = useState<boolean>(false);
+  const [resError, setResError] = useState<string>("");
 
   return (
     <Formik
@@ -33,7 +34,7 @@ export default function ValidationEmail() {
           })
           .catch((error) => {
             setShowSpinner(false);
-            console.log(error);
+            setResError(error.response.data.message);
           });
       }}
     >
@@ -45,29 +46,34 @@ export default function ValidationEmail() {
               لطفا کدی که به ایمیل شما ارسال شده را وارد کنید.
             </Text>
           </View>
-          <View
-            style={{
-              ...styles.inputBox,
-              borderColor: errors.code ? "#ff0000" : "#0C359E",
+          <OtpInput
+            numberOfDigits={4}
+            onTextChange={handleChange("code")}
+            theme={{
+              containerStyle: {
+                width: 250,
+                marginBottom: 20,
+                borderColor: "blue",
+              },
+              focusedPinCodeContainerStyle: {
+                borderColor: resError ? "#ff0000" : "#rgba(12, 53, 158, 1)",
+              },
+              pinCodeContainerStyle: {
+                borderColor: resError ? "#ff0000" : "rgba(12, 53, 158, 1)",
+                borderWidth: 2,
+                width: 50,
+              },
+              focusStickStyle: {
+                backgroundColor: "#585858",
+              },
+              pinCodeTextStyle: {
+                // fontFamily: "iran-snas",
+                color: "#585858",
+              },
             }}
-          >
-            <OtpInput
-              numberOfDigits={4}
-              onTextChange={handleChange("code")}
-              theme={{
-                inputsContainerStyle: {
-                  gap: 16,
-                },
-                pinCodeContainerStyle: {
-                  borderColor: "rgba(12, 53, 158, 1)",
-                  borderWidth: 2,
-                  width: 50,
-                },
-                pinCodeTextStyle: {
-                  fontFamily: "iran-snas",
-                },
-              }}
-            />
+          />
+          <View style={{ height: 25, width:"100%",}}>
+            <Text style={styles.error}>{resError}</Text>
           </View>
           <BaseButton
             label="ارسال"

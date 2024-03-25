@@ -17,10 +17,13 @@ import { form } from "./constant";
 import React, { useState } from "react";
 import { useRouter } from "expo-router";
 import BaseButton from "@/components/base/button";
+import axios from "axios";
 
 export default function Register() {
   const router = useRouter();
   const [showSpinner, setShowSpinner] = useState<boolean>(false);
+  const [resError, setResError] = useState<string>("");
+
   return (
     <Formik
       initialValues={{
@@ -58,30 +61,23 @@ export default function Register() {
       })}
       onSubmit={(values) => {
         setShowSpinner(true);
-        fetch("https://travelorganization.monster/api/User/Accounts/SignUp", {
-          method: "POST",
-          body: JSON.stringify({
+        axios
+          .post("https://travelorganization.monster/api/User/Accounts/SignUp", {
             name: values.name,
             family: values.family,
             email: values.email,
             password: values.password,
-            // re_Password: values.confirmPassword,
-          }),
-          headers: {
-            Accept: "application/json",
-            "Content-type": "application/json",
-          },
-        })
-          .then((res) => res.json())
+          })
           .then((json) => {
             setShowSpinner(false);
-            if (json.isSuccess) {
+            if (json.data.isSuccess) {
               router.replace("/validation-email/");
             }
           })
           .catch((error) => {
             setShowSpinner(false);
-            console.log(error.massage);
+            // console.log(error.response.data);
+            setResError(error.response.data.detail);
           });
       }}
     >
@@ -94,7 +90,8 @@ export default function Register() {
           <View
             style={{
               ...styles.inputBox,
-              borderColor: Object.keys(errors).length ? "#ff0000" : "#0C359E",
+              borderColor:
+                Object.keys(errors).length || resError ? "#ff0000" : "#0C359E",
             }}
           >
             {form(values).map((item) => (
@@ -123,7 +120,8 @@ export default function Register() {
                 errors.email ||
                 errors.family ||
                 errors.name ||
-                errors.password}
+                errors.password ||
+                resError}
             </Text>
           </View>
           <View style={styles.contentbox}>

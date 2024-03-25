@@ -15,10 +15,12 @@ import { styles } from "./style";
 import { Button } from "react-native-paper";
 import { useRouter } from "expo-router";
 import BaseButton from "@/components/base/button";
+import axios from "axios";
 
 export default function ForgetPassword() {
   const router = useRouter();
   const [showSpinner, setShowSpinner] = useState<boolean>(false);
+  const [resError, setResError] = useState<string>("");
 
   return (
     <Formik
@@ -27,19 +29,20 @@ export default function ForgetPassword() {
       }}
       onSubmit={(values) => {
         setShowSpinner(true);
-        fetch(
-          `https://travelorganization.monster/api/User/Email/SendSecurityCodeWithMail?email=${values.email}`
-        )
-          .then((res) => res.json())
+        axios
+          .get(
+            `https://travelorganization.monster/api/User/Email/SendSecurityCodeWithMail?email=${values.email}`
+          )
           .then((json) => {
             console.log(json);
             setShowSpinner(false);
-            if (json.isSuccess) {
+            if (json.data.isSuccess) {
               router.replace("./validation-email");
             }
           })
           .catch((error) => {
             setShowSpinner(false);
+            setResError(error.response.data);
             console.log(error);
           });
       }}
@@ -66,7 +69,7 @@ export default function ForgetPassword() {
             <View
               style={{
                 ...styles.inputBox,
-                borderColor: errors.email ? "#ff0000" : "#0C359E",
+                borderColor: errors.email || resError ? "#ff0000" : "#0C359E",
               }}
             >
               <BaseInput
@@ -76,7 +79,7 @@ export default function ForgetPassword() {
                 icon="email-outline"
                 type="email"
               />
-              <Text style={styles.error}>{errors.email}</Text>
+              <Text style={styles.error}>{errors.email || resError}</Text>
             </View>
             <BaseButton
               handleSubmit={

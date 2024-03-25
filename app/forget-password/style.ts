@@ -36,7 +36,7 @@ export const styles = StyleSheet.create({
   },
   error: {
     position: "absolute",
-    bottom: -30,
+    bottom: -25,
     right: 0,
     color: "#ff0000",
     marginHorizontal: 20,

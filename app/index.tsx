@@ -3,6 +3,7 @@ import { useFonts } from "expo-font";
 import { styles } from "./style";
 import { View } from "react-native";
 import Landing from "./landing";
+import ValidationEmail from "./validation-email";
 
 export default function App() {
   let [fontsLoaded] = useFonts({
@@ -17,7 +18,8 @@ export default function App() {
       // <View style={styles.header}>
       //   <Link href="/login/">👤</Link>
       // </View>
-      <Landing />
+      <ValidationEmail />
+      // <Landing />
     );
   }
 }
