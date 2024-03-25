@@ -10,11 +10,11 @@ import {
   View,
 } from "react-native";
 import { styles } from "./style";
-import { Button } from "react-native-paper";
 import { useRouter } from "expo-router";
 import BaseButton from "@/components/base/button";
 import * as Yup from "yup";
 import axios from "axios";
+import BackButton from "@/components/back-button";
 
 export default function NewPassword() {
   const router = useRouter();
@@ -36,7 +36,7 @@ export default function NewPassword() {
           .then((json) => {
             setShowSpinner(false);
             if (json.data.isSuccess) {
-              router.replace("./login");
+              router.push("./login");
             }
           })
           .catch((error) => {
@@ -60,7 +60,16 @@ export default function NewPassword() {
       {({ handleSubmit, values, errors }) => (
         <View style={{ flex: 1 }}>
           <View style={styles.contentBox}>
-            <Text style={styles.title}>تغییر رمز</Text>
+            <View
+              style={{
+                flexDirection: "row-reverse",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <Text style={styles.title}>تغییر رمز</Text>
+              <BackButton />
+            </View>
             <Text style={styles.description}>
               رمز عبور جدید خود را وارد نمایید
             </Text>

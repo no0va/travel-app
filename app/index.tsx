@@ -4,6 +4,7 @@ import { styles } from "./style";
 import { View } from "react-native";
 import Landing from "./landing";
 import ValidationEmail from "./validation-email";
+import NewPassword from "./new-password";
 
 export default function App() {
   let [fontsLoaded] = useFonts({
@@ -15,10 +16,11 @@ export default function App() {
     return <></>;
   } else {
     return (
-      // <View style={styles.header}>
-      //   <Link href="/login/">👤</Link>
-      // </View>
-      <ValidationEmail />
+      <View style={styles.header}>
+        <Link href="/login/">👤</Link>
+      </View>
+      // <NewPassword />
+      // <ValidationEmail />
       // <Landing />
     );
   }

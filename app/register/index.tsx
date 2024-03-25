@@ -71,7 +71,7 @@ export default function Register() {
           .then((json) => {
             setShowSpinner(false);
             if (json.data.isSuccess) {
-              router.replace("/validation-email/");
+              router.push("/validation-email/");
             }
           })
           .catch((error) => {

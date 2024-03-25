@@ -8,6 +8,7 @@ import axios from "axios";
 import BaseButton from "@/components/base/button";
 import { useState } from "react";
 import { OtpInput } from "react-native-otp-entry";
+import BackButton from "@/components/back-button";
 
 export default function ValidationEmail() {
   const router = useRouter();
@@ -29,7 +30,7 @@ export default function ValidationEmail() {
             setShowSpinner(false);
             console.log(json);
             if (json.status === 200) {
-              router.replace("/new-password/");
+              router.push("/new-password/");
             }
           })
           .catch((error) => {
@@ -41,7 +42,16 @@ export default function ValidationEmail() {
       {({ handleSubmit, values, handleChange, errors }) => (
         <View style={styles.container}>
           <View style={styles.headerTitle}>
-            <Text style={styles.title}>تایید کد</Text>
+            <View
+              style={{
+                flexDirection: "row-reverse",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <Text style={styles.title}>تایید کد</Text>
+              <BackButton />
+            </View>
             <Text style={styles.description}>
               لطفا کدی که به ایمیل شما ارسال شده را وارد کنید.
             </Text>
@@ -72,7 +82,7 @@ export default function ValidationEmail() {
               },
             }}
           />
-          <View style={{ height: 25, width:"100%",}}>
+          <View style={{ height: 25, width: "100%" }}>
             <Text style={styles.error}>{resError}</Text>
           </View>
           <BaseButton

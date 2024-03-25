@@ -37,7 +37,7 @@ export default function ForgetPassword() {
             console.log(json);
             setShowSpinner(false);
             if (json.data.isSuccess) {
-              router.replace("./validation-email");
+              router.push("./validation-email");
             }
           })
           .catch((error) => {

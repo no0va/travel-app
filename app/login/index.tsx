@@ -37,7 +37,7 @@ const Login = () => {
         setShowSpinner(false);
         console.log(json);
         if (json.data.isSuccess) {
-          router.replace("/validation-email/");
+          router.push("/validation-email/");
         }
       })
       .catch((error) => {
