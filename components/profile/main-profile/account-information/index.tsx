@@ -23,11 +23,11 @@ export default function AccountInformation() {
       icon={"account"}
       submitHandler={handleSubmit}
       initailInputsValue={{
-        name: "",
-        family: "",
-        nationalCode: "",
-        birthday: "",
-        phoneNumber: "",
+        name: userDetails.name,
+        family: userDetails.lastName,
+        nationalCode: userDetails.nationalID,
+        birthday: userDetails.birthDate,
+        phoneNumber: userDetails.phoneNo,
       }}
     />
   );
