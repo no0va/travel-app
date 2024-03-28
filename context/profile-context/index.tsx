@@ -9,6 +9,7 @@ type userDataType = {
   phoneNo: string;
   birthDate: string;
   email: string;
+  myTravels: any;
 };
 
 type ProfileContextType = {
@@ -23,7 +24,16 @@ export function useProfileContext() {
 }
 
 export default function ProfileProvider({ children }: { children: ReactNode }) {
-  const [userDetails, setUserDetails] = useState({} as userDataType);
+  const [userDetails, setUserDetails] = useState({
+    userName: "",
+    name: "",
+    lastName: "",
+    nationalID: "",
+    phoneNo: "",
+    birthDate: "",
+    email: "",
+    myTravels: "",
+  } as userDataType);
   return (
     <ProfileContext.Provider value={{ userDetails, setUserDetails }}>
       {children}
