@@ -41,7 +41,7 @@ const Login = () => {
         console.log(json.data.data.token.token);
         if (json.data.isSuccess) {
           AsyncStorage.setItem("token", json.data.data.token.token);
-          router.replace("/landing/");
+          router.replace("/");
         }
       })
       .catch((error) => {
