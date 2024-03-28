@@ -16,14 +16,17 @@ import * as Yup from "yup";
 import axios from "axios";
 import { Snackbar } from "react-native-paper";
 import { useState } from "react";
-import { Link, useRouter } from "expo-router";
+import { Link, useLocalSearchParams, useRouter } from "expo-router";
 import BaseButton from "@/components/base/button";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Login = () => {
   const [visible, setVisible] = useState({ show: false, error: "" });
   const [showSpinner, setShowSpinner] = useState<boolean>(false);
   const [resError, setResError] = useState<string>("");
   const router = useRouter();
+  // const item = useLocalSearchParams();
+  // console.log(item.email)
 
   const onDismissSnackBar = () => setVisible({ show: false, error: "" });
   const submitHandler = (values: { email: string; password: string }) => {
@@ -35,9 +38,10 @@ const Login = () => {
       })
       .then((json) => {
         setShowSpinner(false);
-        console.log(json);
+        console.log(json.data.data.token.token);
         if (json.data.isSuccess) {
-          router.push("/validation-email/");
+          AsyncStorage.setItem("token", json.data.data.token.token);
+          router.replace("/landing/");
         }
       })
       .catch((error) => {
@@ -82,7 +86,9 @@ const Login = () => {
             style={{
               ...styles.inputBox,
               borderColor:
-                errors.email || errors.password || resError ? "#ff0000" : "#0C359E",
+                errors.email || errors.password || resError
+                  ? "#ff0000"
+                  : "#0C359E",
             }}
           >
             <BaseInput

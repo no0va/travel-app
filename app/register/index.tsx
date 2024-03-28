@@ -94,7 +94,7 @@ export default function Register() {
                 Object.keys(errors).length || resError ? "#ff0000" : "#0C359E",
             }}
           >
-            {form(values).map((item) => (
+            {form(values).map((item, index) => (
               <React.Fragment key={item.name}>
                 <BaseInput
                   value={item.value}
@@ -103,7 +103,7 @@ export default function Register() {
                   icon={item.icon}
                   type={item.type as "password" | "text" | "email"}
                 />
-                {item.line && (
+                {index + 1 !== form(values).length && (
                   <View
                     style={{
                       backgroundColor: "#bbb",
