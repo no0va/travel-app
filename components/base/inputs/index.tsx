@@ -7,12 +7,14 @@ import { useState } from "react";
 export const BaseInput = ({
   placeholder,
   icon,
+  iconColor = "#bbb",
   value,
   name,
   type,
 }: {
   placeholder: string;
   icon: any;
+  iconColor?: string;
   value: string;
   name: string;
   type: "text" | "email" | "password";
@@ -28,7 +30,11 @@ export const BaseInput = ({
   };
   return (
     <View style={styles.baseInputStyle}>
-      <MaterialCommunityIcons name={icon} style={styles.inputIcon} size={25} />
+      <MaterialCommunityIcons
+        name={icon}
+        style={{ ...styles.inputIcon, color: iconColor }}
+        size={25}
+      />
       {type === "password" ? (
         <>
           <TextInput

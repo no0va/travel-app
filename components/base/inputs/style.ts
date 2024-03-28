@@ -28,7 +28,7 @@ export const styles = StyleSheet.create({
   inputIcon: {
     marginRight: 5,
     marginLeft: 15,
-    color: "#bbb",
+    // color: "#bbb",
   },
   // inputArrow: {
   //   position: "absolute",
