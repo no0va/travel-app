@@ -1,18 +1,29 @@
-import * as React from "react";
 import { View } from "react-native";
 import { BottomNavigation, Text } from "react-native-paper";
-import * as NavigationBar from 'expo-navigation-bar';
+import * as NavigationBar from "expo-navigation-bar";
+import Profile from "@/components/profile";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useEffect, useState } from "react";
+import BaseButton from "@/components/base/button";
+import { router } from "expo-router";
+import axios from "axios";
 
 const TicketRoute = () => <Text>Ticket</Text>;
 const SearchRoute = () => <Text>Search</Text>;
 const ToursRoute = () => <Text>Tours</Text>;
 const HomeRoute = () => <Text>Home</Text>;
-const ProfileRoute = () => <Text>Profile</Text>;
+const ProfileRoute = () => (
+  <BaseButton
+    handleSubmit={() => router.push("/login/")}
+    label="ورود"
+    loader={false}
+  />
+);
 
 const Landing = () => {
   NavigationBar.setBackgroundColorAsync("rgb(237, 237, 255)");
-  const [index, setIndex] = React.useState(0);
-  const [routes] = React.useState([
+  const [index, setIndex] = useState(0);
+  const [routes] = useState([
     { key: "tours", focusedIcon: "palm-tree" },
     {
       key: "ticket",
@@ -37,7 +48,7 @@ const Landing = () => {
     search: SearchRoute,
     tours: ToursRoute,
     home: HomeRoute,
-    profile: ProfileRoute,
+    profile: Profile,
   });
 
   return (
